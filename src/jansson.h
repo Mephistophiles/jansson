@@ -202,6 +202,7 @@ int json_array_append_new(json_t *array, json_t *value);
 int json_array_insert_new(json_t *array, size_t index, json_t *value);
 int json_array_remove(json_t *array, size_t index);
 int json_array_clear(json_t *array);
+int json_array_contains(const json_t *array, json_t *value);
 int json_array_extend(json_t *array, json_t *other);
 
 static JSON_INLINE

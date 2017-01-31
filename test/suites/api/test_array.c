@@ -411,12 +411,42 @@ static void test_array_foreach()
     json_array_foreach(array1, index, value) {
         json_array_append(array2, value);
     }
-    
+
     if(!json_equal(array1, array2))
         fail("json_array_foreach failed to iterate all elements");
 
     json_decref(array1);
     json_decref(array2);
+}
+
+static void test_array_contains(void)
+{
+    json_t *array;
+    json_t *string;
+    json_t *non_contains_string;
+
+    array = json_array();
+    string = json_string_nocheck("test");
+    non_contains_string = json_string_nocheck("foo");
+
+    json_array_append(array, string);
+    json_array_append_new(array, json_string_nocheck("bar"));
+
+    if (!json_array_contains(array, string))
+        fail("json_array_contains failed to search value");
+
+    if (json_array_contains(array, non_contains_string))
+        fail("json_array_contains found a value that is not contained in the array");
+
+    if (json_array_contains(array, NULL))
+        fail("json_array_contains failed to search value (NULL)");
+
+    if (json_array_contains(NULL, string))
+        fail("json_array_contains failed to search value in NULL array");
+
+    json_decref(array);
+    json_decref(string);
+    json_decref(non_contains_string);
 }
 
 
@@ -429,4 +459,5 @@ static void run_tests()
     test_extend();
     test_circular();
     test_array_foreach();
+    test_array_contains();
 }

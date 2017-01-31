@@ -497,6 +497,13 @@ A JSON array is an ordered collection of other JSON values.
    if *array* is *NULL*, or if *index* is out of range, *NULL* is
    returned.
 
+.. function:: int json_array_contains(const json_t *array, json_t *value)
+
+   Returns 1 if *array* contains *value* and 0 otherwise. That it uses
+   `json_equal()` to compare two values.
+
+   .. versionadded:: 2.11
+
 .. function:: int json_array_set(json_t *array, size_t index, json_t *value)
 
    Replaces the element in *array* at position *index* with *value*.

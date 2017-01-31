@@ -27,6 +27,7 @@ EXPORTS
     json_array_append_new
     json_array_insert_new
     json_array_remove
+    json_array_contains
     json_array_clear
     json_array_extend
     json_object

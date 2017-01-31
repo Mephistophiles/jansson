@@ -559,6 +559,27 @@ int json_array_clear(json_t *json)
     return 0;
 }
 
+int json_array_contains(const json_t *json, json_t *value)
+{
+    json_array_t *array;
+    size_t i;
+
+    if (!value)
+        return 0;
+
+    if (!json_is_array(json))
+        return 0;
+
+    array = json_to_array(json);
+
+    for (i = 0; i < array->entries; i++) {
+        if (json_equal(array->table[i], value))
+            return 1;
+    }
+
+    return 0;
+}
+
 int json_array_extend(json_t *json, json_t *other_json)
 {
     json_array_t *array, *other;
